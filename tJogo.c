@@ -1,6 +1,8 @@
 #ifndef _TJOGO_C_
 #define _TJOGO_C_
 
+#include <stdio.h>
+#include <stdlib.h>
 #include "tJogo.h"
 #include "tJogador.h"
 #include "tPalavra.h"
@@ -25,13 +27,13 @@ tJogo MenuPrincipal(tJogo jogo){//
   int i=0;
   char opcao='a';
 
-  system("cls");
+  system("clear");
   ImprimeTelaMenuPrincipal(0); //padrao
   while(1){
     opcao='a';
     scanf("%c", &opcao);
     if(opcao == '0'){
-      system("cls");
+      system("clear");
       ImprimeTelaMenuPrincipal(-1); //sair do jogo
       scanf("%c", &opcao);
       if(opcao == '0'){
@@ -47,7 +49,7 @@ tJogo MenuPrincipal(tJogo jogo){//
       }
       break;
     }
-    system("cls");
+    system("clear");
     ImprimeTelaMenuPrincipal(1); //entrada invalida
   }
   
@@ -178,7 +180,7 @@ tJogo EscolherNomes(tJogo jogo){//
       break;
     }
 
-    system("cls");
+    system("clear");
     ImprimeMargemCima();
     printf("\n"
     "        _____                                 _                   \n"
@@ -223,7 +225,9 @@ tJogo EscolherNomes(tJogo jogo){//
     seta[i][2][0] = '\0';
 
     msgErro[0] = '\0';
-    scanf("%49s", &entrada);
+
+    scanf("%49s", entrada);
+
     deuErro = EhNomeErrado(entrada);
     switch(deuErro){
       case 1:
@@ -247,7 +251,7 @@ tJogo EscolherNomes(tJogo jogo){//
       break;
       
       case 0:
-      sprintf(jog[i], entrada);
+      sprintf(jog[i], "%s", entrada);
       jogo.jogadores[i] = MudarNome(jogo.jogadores[i], entrada);
       CentralizaString(jog[i], sizeof(jog[i]));
       break;
@@ -316,7 +320,7 @@ int Jogar(tJogo jogo){
     DeixaTodasLetrasMaiusculas(pal);
     while(1){
       while(1){
-        system("cls");
+        system("clear");
         ImprimeTelaJogo(jogo, codigo);
         scanf("\n");
         scanf("%c", &entrada);
@@ -341,7 +345,7 @@ int Jogar(tJogo jogo){
       
       jogo = CalculaFimDeJogo(jogo);
       if( EhFimDeJogo(jogo) ){//fim de jogo
-        system("cls");
+        system("clear");
         ImprimeTelaJogo(jogo, 3);
         break;
       }
@@ -401,7 +405,7 @@ void ImprimeTelaJogo(tJogo jogo, int codigo){
   }
   CentralizaString(palavraEspacada, TAM_PALAVRA*2);
   
-  sprintf(letrasUsadas, jogo.letrasUsadas);
+  sprintf(letrasUsadas, "%s", jogo.letrasUsadas);
   for(i=26;i>=0;i--){
     letrasUsadas[(i*2)+1] = letrasUsadas[i];
     letrasUsadas[(i*2)] = ' ';
@@ -608,7 +612,7 @@ void ImprimeTelaJogo(tJogo jogo, int codigo){
 }
 
 void ObtemNomeJogador(char * copiaNome, tJogador jogador){
-  sprintf(copiaNome, jogador.nome);
+  sprintf(copiaNome, "%s", jogador.nome);
 }
 
 void CentralizaString(char * nome, int strSize){
@@ -637,14 +641,6 @@ void CentralizaString(char * nome, int strSize){
     nome[i] = ' ';
   }
   nome[strSize-1] = '\0';
-}
-
-void ObtemDica(char * copiaNome, tPalavra palavra){
-  sprintf(copiaNome, palavra.palavra[ID_DICA]);
-}
-
-void ObtemPalavra(char * copiaNome, tPalavra palavra){
-  sprintf(copiaNome, palavra.palavra[ID_PALAVRA]);
 }
 
 void DeixaPrimeiraLetraMaiuscula(char * str){

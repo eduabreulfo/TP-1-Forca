@@ -15,10 +15,10 @@ int main(void){
   tJogo jogo;
   srand(time(NULL));
 
-  jogo = InicializaJogo(jogo); //inicializacao dos temas
-  jogo = MenuPrincipal(jogo); //tela inicial
-  jogo = EscolherNomes(jogo); //escolha dos nomes
-  Jogar(jogo); //partida
+  jogo = InicializaJogo(jogo);
+  jogo = MenuPrincipal(jogo);
+  jogo = EscolherNomes(jogo);
+  Jogar(jogo);
   
   return 0;
 }

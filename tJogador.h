@@ -4,12 +4,14 @@
 #define PONTUACAO_INICIAL 6
 #define TAM_NOME 14
 #define MIN_NOME 3
+
 typedef struct{
   char nome[TAM_NOME];
   int pontos;
   int qtdAcertos;
   int id;
 } tJogador;
+
 tJogador MudarNome(tJogador jogador, char nome[TAM_NOME]);
 void ImprimeTelaEscolherNomes(int qtd);
 int EhLetra(char c);

@@ -1,7 +1,13 @@
 #ifndef _TPALAVRA_C_
 #define _TPALAVRA_C_
 
+#include <stdio.h>
+#include <stdlib.h>
 #include "tPalavra.h"
+
+#define NOME_ARQUIVO_PALAVRAS "palavras.csv"
+#define ID_DICA 0
+#define ID_PALAVRA 1
 
 int ContaPalavras(){
   FILE * arq = fopen(NOME_ARQUIVO_PALAVRAS, "r");
@@ -47,6 +53,14 @@ void LePalavras(tPalavra * palavras, int qtd){
   }
 
   fclose(arq);
+}
+
+void ObtemDica(char * copiaNome, tPalavra palavra){
+  sprintf(copiaNome, "%s", palavra.palavra[ID_DICA]);
+}
+
+void ObtemPalavra(char * copiaNome, tPalavra palavra){
+  sprintf(copiaNome, "%s", palavra.palavra[ID_PALAVRA]);
 }
 
 #endif

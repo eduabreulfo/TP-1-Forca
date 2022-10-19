@@ -1,7 +1,10 @@
 #ifndef _TJOGO_H_
 #define _TJOGO_H_
 
-#include 
+#include "tPalavra.h"
+#include "tJogador.h"
+
+#define QTD_MAX_PALAVRAS 100
 
 typedef struct{
   int qtdPalavras;
