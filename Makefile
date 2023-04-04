@@ -1,17 +1,31 @@
+CC = gcc
+CFLAGS = -Wall
 
-FLAGS = -Wall -Wno-unused-result
+SRCDIR = src
+OBJDIR = obj
+INCDIR = headers
 
-DEPS = tJogador.h tJogo.h tPalavra.h
-OBJ = tJogador.o tJogo.o tPalavra.o main.o
+SRCS = main.c $(wildcard $(SRCDIR)/*.c)
+OBJS = $(patsubst $(SRCDIR)/%.c,$(OBJDIR)/%.o,$(SRCS))
+HEADERS = $(wildcard $(INCDIR)/*.h)
 
-%.o: %.c $(DEPS)
-	gcc -c -o $@ $< $(FLAGS)
+TARGET = main
 
-all: $(OBJ)
-	gcc -o main $(OBJ) $(FLAGS)
+RM = rm -f
+
+all: $(TARGET)
+
+$(OBJDIR):
+	mkdir -p $(OBJDIR)
+
+$(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIR)
+	$(CC) -c -o $@ $< $(FLAGS)
+
+$(TARGET): $(OBJS)
+	$(CC) $(CFLAGS) -o $(TARGET) $(OBJS)
 
 clean:
-	rm -f main *.o
+	$(RM) $(OBJS) $(TARGET)
 
 run: 
-	./main 
+	./$(TARGET)
