@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "tJogo.h"
+#include "headers/tJogo.h"
 
 //tPlacar
 /*
