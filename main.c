@@ -13,9 +13,10 @@ tPlacar OrganizaPlacar(tPlacar placar);
 
 int main(void){
   tJogo jogo;
-  srand(time(NULL));
+  //srand(time(NULL));
 
   jogo = InicializaJogo(jogo);
+  printf("InicializaJogo(jogo) saiu ok\n");
   jogo = MenuPrincipal(jogo);
   jogo = EscolherNomes(jogo);
   Jogar(jogo);
@@ -24,4 +25,4 @@ int main(void){
 }
 
 //Eduardo Abreu Lanes Fidelis de Oliveira
-//UFES - Goiabeiras, Brazil
+//UFES | Goiabeiras - 04/2023

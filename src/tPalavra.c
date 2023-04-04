@@ -10,15 +10,17 @@
 #define ID_PALAVRA 1
 
 int ContaPalavras(){
-  FILE * arq = fopen(NOME_ARQUIVO_PALAVRAS, "r");
-  int qtd=1;
+  FILE * arq = fopen(NOME_ARQUIVO_PALAVRAS, "r"); printf("abriu arquivo!!\n");
+  int qtd=0;
   char letra;
 
-  while(fscanf(arq, "%c", &letra)==1){
-    if(letra=='\n'){
+  while(1){
+    if(foef(arq)){
       qtd++;
+      break;
     }
   }
+
   fclose(arq);
   return qtd;
 }

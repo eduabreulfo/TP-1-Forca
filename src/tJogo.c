@@ -10,8 +10,9 @@
 tJogo InicializaJogo(tJogo jogo){
   int i=0;
 
-  jogo.qtdPalavras = ContaPalavras();
-  LePalavras(jogo.palavras, jogo.qtdPalavras);
+  jogo.qtdPalavras = ContaPalavras(); printf("contou palavras!\n");
+  LePalavras(jogo.palavras, jogo.qtdPalavras); printf("leu palavras!!\n");
+
   jogo.jogadorVencedor[0] = 0;
   jogo.jogadorVencedor[1] = -1;
   jogo.qtdVencedores = -1;
@@ -309,7 +310,7 @@ int EhNumero(char c){
 }
 
 int Jogar(tJogo jogo){
-  int i=0, codigo=0, continuar=0;
+  int codigo=0, continuar=0;
   char entrada;
   char pal[TAM_PALAVRA];
 
