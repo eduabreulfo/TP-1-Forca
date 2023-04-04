@@ -1,12 +1,14 @@
+
+# variaveis
 CC = gcc
-CFLAGS = -Wall
+CFLAGS =
 
 SRCDIR = src
 OBJDIR = obj
 INCDIR = headers
 
-SRCS = main.c $(wildcard $(SRCDIR)/*.c)
-OBJS = $(patsubst $(SRCDIR)/%.c,$(OBJDIR)/%.o,$(SRCS))
+SRCS = $(wildcard $(SRCDIR)/*.c)
+OBJS = $(patsubst $(SRCDIR)/%.c,$(OBJDIR)/%.o,$(SRCS)) $(OBJDIR)/main.o
 HEADERS = $(wildcard $(INCDIR)/*.h)
 
 TARGET = main
@@ -18,14 +20,20 @@ all: $(TARGET)
 $(OBJDIR):
 	mkdir -p $(OBJDIR)
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIR)
-	$(CC) -c -o $@ $< $(FLAGS)
+# compilacao (.c -> .o)
+$(OBJDIR)/%.o: $(SRCDIR)/%.c $(HEADERS) | $(OBJDIR)
+	$(CC) -c -o $@ $< $(CFLAGS)
 
+$(OBJDIR)/main.o: main.c $(HEADERS) | $(OBJDIR)
+	$(CC) -c -o $@ $< $(CFLAGS)
+
+# linkagem (.o -> executavel)
 $(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) -o $(TARGET) $(OBJS)
 
+# outras regras
 clean:
-	$(RM) $(OBJS) $(TARGET)
+	$(RM) $(OBJS)  $(TARGET)
 
 run: 
 	./$(TARGET)
