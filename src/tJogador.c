@@ -2,7 +2,7 @@
 #define _TJOGADOR_C_
 
 #include <stdio.h>
-#include "tJogador.h"
+#include "../headers/tJogador.h"
 
 tJogador MudarNome(tJogador jogador, char nome[TAM_NOME]){
   sprintf(jogador.nome, "%s", nome);

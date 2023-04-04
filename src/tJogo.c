@@ -3,11 +3,11 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "tJogo.h"
-#include "tJogador.h"
-#include "tPalavra.h"
+#include "../headers/tJogo.h"
+#include "../headers/tJogador.h"
+#include "../headers/tPalavra.h"
 
-tJogo InicializaJogo(tJogo jogo){//
+tJogo InicializaJogo(tJogo jogo){
   int i=0;
 
   jogo.qtdPalavras = ContaPalavras();

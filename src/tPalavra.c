@@ -3,9 +3,9 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "tPalavra.h"
+#include "../headers/tPalavra.h"
 
-#define NOME_ARQUIVO_PALAVRAS "palavras.csv"
+#define NOME_ARQUIVO_PALAVRAS "../data/palavras.csv"
 #define ID_DICA 0
 #define ID_PALAVRA 1
 

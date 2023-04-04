@@ -1,8 +1,8 @@
 #ifndef _TJOGO_H_
 #define _TJOGO_H_
 
-#include "tPalavra.h"
-#include "tJogador.h"
+#include "../headers/tPalavra.h"
+#include "../headers/tJogador.h"
 
 #define QTD_MAX_PALAVRAS 100
 
