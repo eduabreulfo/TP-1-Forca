@@ -8,8 +8,8 @@ typedef struct{
   int tamanho;
 } tPalavra;
 
-void LePalavras(tPalavra * palavras, int qtd);
-int ContaPalavras();
+int ContaPalavras(FILE *arq);
+void LePalavras(FILE *arq, tPalavra * palavras, int qtd);
 void ObtemDica(char * copiaNome, tPalavra palavra);
 void ObtemPalavra(char * copiaNome, tPalavra palavra);
 

@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "headers/tJogo.h"
+#define NOME_ARQUIVO_PALAVRAS "data/palavras.csv"
 
 //tPlacar
 /*
@@ -14,9 +15,11 @@ tPlacar OrganizaPlacar(tPlacar placar);
 int main(void){
   tJogo jogo;
   //srand(time(NULL));
+  FILE *arq = fopen(NOME_ARQUIVO_PALAVRAS, "r");
 
-  jogo = InicializaJogo(jogo);
-  printf("InicializaJogo(jogo) saiu ok\n");
+  jogo = InicializaJogo(arq, jogo);
+  printf("InicializaJogo() saiu ok\n");
+    fclose(arq);
   jogo = MenuPrincipal(jogo);
   jogo = EscolherNomes(jogo);
   Jogar(jogo);

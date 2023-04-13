@@ -18,7 +18,7 @@ typedef struct{
   int jogadorVencedor[2];
   //tPlacar placar;
 } tJogo;
-tJogo InicializaJogo(tJogo jogo);
+tJogo InicializaJogo(FILE *arq, tJogo jogo);
 tJogo MenuPrincipal(tJogo jogo);
 int Jogar(tJogo jogo);
 void ImprimeTelaMenuPrincipal();

@@ -5,28 +5,24 @@
 #include <stdlib.h>
 #include "../headers/tPalavra.h"
 
-#define NOME_ARQUIVO_PALAVRAS "../data/palavras.csv"
 #define ID_DICA 0
 #define ID_PALAVRA 1
 
-int ContaPalavras(){
-  FILE * arq = fopen(NOME_ARQUIVO_PALAVRAS, "r"); printf("abriu arquivo!!\n");
+int ContaPalavras(FILE *arq){
   int qtd=0;
   char letra;
 
   while(1){
-    if(foef(arq)){
+    if(feof(arq)){
       qtd++;
       break;
     }
   }
 
-  fclose(arq);
   return qtd;
 }
 
-void LePalavras(tPalavra * palavras, int qtd){
-  FILE * arq = fopen(NOME_ARQUIVO_PALAVRAS, "r");
+void LePalavras(FILE *arq, tPalavra * palavras, int qtd){
   char letra;
   int i=0, q=0;
 
@@ -54,7 +50,6 @@ void LePalavras(tPalavra * palavras, int qtd){
     q=0;
   }
 
-  fclose(arq);
 }
 
 void ObtemDica(char * copiaNome, tPalavra palavra){

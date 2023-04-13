@@ -7,11 +7,11 @@
 #include "../headers/tJogador.h"
 #include "../headers/tPalavra.h"
 
-tJogo InicializaJogo(tJogo jogo){
+tJogo InicializaJogo(FILE *arq, tJogo jogo){
   int i=0;
 
-  jogo.qtdPalavras = ContaPalavras(); printf("contou palavras!\n");
-  LePalavras(jogo.palavras, jogo.qtdPalavras); printf("leu palavras!!\n");
+  jogo.qtdPalavras = ContaPalavras(arq); printf("contou palavras!\n");
+  LePalavras(arq, jogo.palavras, jogo.qtdPalavras); printf("leu palavras!!\n");
 
   jogo.jogadorVencedor[0] = 0;
   jogo.jogadorVencedor[1] = -1;
