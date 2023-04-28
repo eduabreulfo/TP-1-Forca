@@ -19,7 +19,7 @@ int main(void){
 
   jogo = InicializaJogo(arq, jogo);
   printf("InicializaJogo() saiu ok\n");
-    fclose(arq);
+  fclose(arq);
   jogo = MenuPrincipal(jogo);
   jogo = EscolherNomes(jogo);
   Jogar(jogo);

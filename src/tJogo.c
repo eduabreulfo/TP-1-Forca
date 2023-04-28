@@ -1,8 +1,6 @@
-#ifndef _TJOGO_C_
-#define _TJOGO_C_
-
 #include <stdio.h>
 #include <stdlib.h>
+#include "../headers/common.h"
 #include "../headers/tJogo.h"
 #include "../headers/tJogador.h"
 #include "../headers/tPalavra.h"
@@ -32,10 +30,12 @@ tJogo MenuPrincipal(tJogo jogo){//
   ImprimeTelaMenuPrincipal(0); //padrao
   while(1){
     opcao='a';
+    ImprimePrefixo();
     scanf("%c", &opcao);
     if(opcao == '0'){
       system("clear");
       ImprimeTelaMenuPrincipal(-1); //sair do jogo
+      ImprimePrefixo();
       scanf("%c", &opcao);
       if(opcao == '0'){
         exit(0);
@@ -72,7 +72,7 @@ void ImprimeTelaMenuPrincipal(int erro){//
       sprintf(msg, "   Opcao invalida!!!");
     break;
   }
-  ImprimeMargemCima();
+  //ImprimeMargemCima();
   printf("\n"
   "           _________________      |        |\n"
   "          |                 |   ._|()(|() (|(|\n"
@@ -99,15 +99,15 @@ void ImprimeTelaMenuPrincipal(int erro){//
   "                       |  0- Sair do Jogo        |                v1.0\n"
   "                       +-------------------------+                2022\n"
   "\n", msg);
-  ImprimeMargemBaixo();
+  //ImprimeMargemBaixo();
 }
 
 void ImprimeMargemCima(){//
-  printf("========================================================================\n");
+  printf("------------------------------------------------------------------------\n");
 }
 
 void ImprimeMargemBaixo(){//
-  printf("========================================================================\n");
+  printf("------------------------------------------------------------------------\n");
 }
 
 tJogo EscolherNomes(tJogo jogo){//
@@ -227,6 +227,7 @@ tJogo EscolherNomes(tJogo jogo){//
 
     msgErro[0] = '\0';
 
+    ImprimePrefixo();
     scanf("%49s", entrada);
 
     deuErro = EhNomeErrado(entrada);
@@ -324,6 +325,7 @@ int Jogar(tJogo jogo){
         system("clear");
         ImprimeTelaJogo(jogo, codigo);
         scanf("\n");
+        ImprimePrefixo();
         scanf("%c", &entrada);
         if( !EhLetra(entrada) ){
           codigo=1;
@@ -838,5 +840,3 @@ int JogarNovamente(){
   }
   return 0;
 }
-
-#endif

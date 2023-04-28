@@ -1,5 +1,3 @@
-#ifndef _TJOGADOR_C_
-#define _TJOGADOR_C_
 
 #include <stdio.h>
 #include "../headers/tJogador.h"
@@ -45,5 +43,3 @@ int ObtemQtdAcertosJogador(tJogador jogador){
   qtd = jogador.qtdAcertos;
   return qtd;
 }
-
-#endif

@@ -1,23 +1,25 @@
-#ifndef _TPALAVRA_C_
-#define _TPALAVRA_C_
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "../headers/common.h"
 #include "../headers/tPalavra.h"
 
 #define ID_DICA 0
 #define ID_PALAVRA 1
 
 int ContaPalavras(FILE *arq){
+  return 40;
   int qtd=0;
   char letra;
 
-  while(1){
-    if(feof(arq)){
+  while(!feof(arq)){
+    sscanf("%c", letra);
+    if(letra == '\n'){
       qtd++;
-      break;
     }
   }
+  printf("qtd: %d\n", qtd);
+  scanf("%c");
 
   return qtd;
 }
@@ -59,5 +61,3 @@ void ObtemDica(char * copiaNome, tPalavra palavra){
 void ObtemPalavra(char * copiaNome, tPalavra palavra){
   sprintf(copiaNome, "%s", palavra.palavra[ID_PALAVRA]);
 }
-
-#endif
