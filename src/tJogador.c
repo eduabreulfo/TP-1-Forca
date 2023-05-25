@@ -2,43 +2,43 @@
 #include <stdio.h>
 #include "../headers/tJogador.h"
 
-tJogador MudarNome(tJogador jogador, char nome[TAM_NOME]){
+tJogador mudar_nome(tJogador jogador, char nome[TAM_NOME]){
   sprintf(jogador.nome, "%s", nome);
   return jogador;
 }
 
-tJogador AlterarID(tJogador jogador, int id){
+tJogador alterar_id(tJogador jogador, int id){
   jogador.id = id;
   return jogador;
 }
 
-tJogador AlterarPontuacao(tJogador jogador, int qtd){
+tJogador alterar_pontuacao(tJogador jogador, int qtd){
   jogador.pontos += qtd;
   return jogador;
 }
 
-tJogador ReiniciarPontuacao(tJogador jogador){
+tJogador reiniciar_pontuacao(tJogador jogador){
   jogador.pontos = PONTUACAO_INICIAL;
   return jogador;
 }
 
-tJogador AlterarQtdAcertos(tJogador jogador, int qtd){
+tJogador alterar_qtd_acertos(tJogador jogador, int qtd){
   jogador.qtdAcertos += qtd;
   return jogador;
 }
 
-tJogador ReiniciarQtdAcertos(tJogador jogador){
+tJogador reiniciar_qtd_acertos(tJogador jogador){
   jogador.qtdAcertos = 0;
   return jogador;
 }
 
-int ObtemPontuacaoJogador(tJogador jogador){
+int obtem_pontuacao_jogador(tJogador jogador){
   int pts;
   pts = jogador.pontos;
   return pts;
 }
 
-int ObtemQtdAcertosJogador(tJogador jogador){
+int obtem_qtd_acertos_jogador(tJogador jogador){
   int qtd;
   qtd = jogador.qtdAcertos;
   return qtd;

@@ -7,24 +7,24 @@
 #define ID_DICA 0
 #define ID_PALAVRA 1
 
-int ContaPalavras(FILE *arq){
+int conta_palavras(FILE *arq){
   return 40;
   int qtd=0;
   char letra;
 
   while(!feof(arq)){
-    sscanf("%c", letra);
+    fscanf(arq, "%c", &letra);
     if(letra == '\n'){
       qtd++;
     }
   }
   printf("qtd: %d\n", qtd);
-  scanf("%c");
+  scanf("%*c");
 
   return qtd;
 }
 
-void LePalavras(FILE *arq, tPalavra * palavras, int qtd){
+void le_palavras(FILE *arq, tPalavra * palavras, int qtd){
   char letra;
   int i=0, q=0;
 
@@ -54,10 +54,10 @@ void LePalavras(FILE *arq, tPalavra * palavras, int qtd){
 
 }
 
-void ObtemDica(char * copiaNome, tPalavra palavra){
+void obtem_dica(char * copiaNome, tPalavra palavra){
   sprintf(copiaNome, "%s", palavra.palavra[ID_DICA]);
 }
 
-void ObtemPalavra(char * copiaNome, tPalavra palavra){
+void obtem_palavra(char * copiaNome, tPalavra palavra){
   sprintf(copiaNome, "%s", palavra.palavra[ID_PALAVRA]);
 }

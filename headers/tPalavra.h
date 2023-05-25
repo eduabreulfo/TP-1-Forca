@@ -1,6 +1,8 @@
 #ifndef _TPALAVRA_H_
 #define _TPALAVRA_H_
 
+#include <stdio.h>
+
 #define TAM_PALAVRA 15
 
 typedef struct{
@@ -8,9 +10,9 @@ typedef struct{
   int tamanho;
 } tPalavra;
 
-int ContaPalavras(FILE *arq);
-void LePalavras(FILE *arq, tPalavra * palavras, int qtd);
-void ObtemDica(char * copiaNome, tPalavra palavra);
-void ObtemPalavra(char * copiaNome, tPalavra palavra);
+int conta_palavras(FILE *arq);
+void le_palavras(FILE *arq, tPalavra * palavras, int qtd);
+void obtem_dica(char * copiaNome, tPalavra palavra);
+void obtem_palavra(char * copiaNome, tPalavra palavra);
 
 #endif

@@ -5,11 +5,11 @@
 #include "../headers/tJogador.h"
 #include "../headers/tPalavra.h"
 
-tJogo InicializaJogo(FILE *arq, tJogo jogo){
+tJogo inicializa_jogo(FILE *arq, tJogo jogo){
   int i=0;
 
-  jogo.qtdPalavras = ContaPalavras(arq); printf("contou palavras!\n");
-  LePalavras(arq, jogo.palavras, jogo.qtdPalavras); printf("leu palavras!!\n");
+  jogo.qtdPalavras = conta_palavras(arq); printf("contou palavras!\n");
+  le_palavras(arq, jogo.palavras, jogo.qtdPalavras); printf("leu palavras!!\n");
 
   jogo.jogadorVencedor[0] = 0;
   jogo.jogadorVencedor[1] = -1;
@@ -22,42 +22,36 @@ tJogo InicializaJogo(FILE *arq, tJogo jogo){
   return jogo;
 }
 
-tJogo MenuPrincipal(tJogo jogo){//
+tJogo menu_principal(tJogo jogo){//
   int i=0;
   char opcao='a';
 
-  system("clear");
-  ImprimeTelaMenuPrincipal(0); //padrao
+  limpa_tela();
+  imprime_tela_menu_principal(0); //padrao
   while(1){
     opcao='a';
-    ImprimePrefixo();
+    imprime_prefixo();
     scanf("%c", &opcao);
     if(opcao == '0'){
-      system("clear");
-      ImprimeTelaMenuPrincipal(-1); //sair do jogo
-      ImprimePrefixo();
-      scanf("%c", &opcao);
-      if(opcao == '0'){
-        exit(0);
-      }
+      exit(0);
     }
     if(opcao>='1' && opcao<='4'){
       jogo.qtdJogadores = opcao-'0';
       for(i=0;i<jogo.qtdJogadores;i++){
-        jogo.jogadores[i] = AlterarID(jogo.jogadores[i], i+1);
-        jogo.jogadores[i] = ReiniciarPontuacao(jogo.jogadores[i]);
-        jogo.jogadores[i] = ReiniciarQtdAcertos(jogo.jogadores[i]);
+        jogo.jogadores[i] = alterar_id(jogo.jogadores[i], i+1);
+        jogo.jogadores[i] = reiniciar_pontuacao(jogo.jogadores[i]);
+        jogo.jogadores[i] = reiniciar_qtd_acertos(jogo.jogadores[i]);
       }
       break;
     }
-    system("clear");
-    ImprimeTelaMenuPrincipal(1); //entrada invalida
+    limpa_tela();
+    imprime_tela_menu_principal(1); //entrada invalida
   }
   
   return jogo;
 }
 
-void ImprimeTelaMenuPrincipal(int erro){//
+void imprime_tela_menu_principal(int erro){//
   char msg[24];
   switch(erro){
     case 0:
@@ -72,45 +66,45 @@ void ImprimeTelaMenuPrincipal(int erro){//
       sprintf(msg, "   Opcao invalida!!!");
     break;
   }
-  //ImprimeMargemCima();
-  printf("\n"
-  "           _________________      |        |\n"
-  "          |                 |   ._|()(|() (|(|\n"
-  "          |     ____________|        _|\n"
-  "          |    |     (>>>>)    ___ ____    _______   __________\n"
-  "          |    |__   (>>>>)   |   |    |  /       | /   ____   \\\n"
-  "          |       |  (>>>>)   |     ,__| /     ___| |__|    |  |\n"
-  "          |     __| / /^^\\/\\  |    /     |    |      _______|  |\n"
-  "          |    |   ( (    )/) |    |     |    |     /   ____   |\n"
-  "          |    |   | |    |/| |    |     |    |___  |  |    |  |\n"
-  "          |    |   \\ \\____/// |    |     \\        | |  \\____/  |\n"
-  "          |____|    \\_____,/  |____|      \\_______| \\_______,__|\n"
-  "                                 __               _\n"
-  "                                |_  |       |    /_||    _\n"
-  "                         |)()|' |__(|(/(||'(|() /  ||)|'(-(/\n"
-  "                         |\n"
-  "\n"
-  "                           %s\n"
-  "                       +-------------------------+\n"
-  "                       |  1- Solo (Treinamento)  |\n"
-  "                       |  2- 2 jogadores         |\n"
-  "                       |  3- 3 jogadores         |\n"
-  "                       |  4- 4 jogadores         |\n"
-  "                       |  0- Sair do Jogo        |                v1.0\n"
-  "                       +-------------------------+                2022\n"
-  "\n", msg);
-  //ImprimeMargemBaixo();
+  imprime_margem_cima();
+  printf(
+  "s                                                              s\n"
+  "s     _________________      |        |                        s\n"
+  "s    |                 |   \\_|()(|() (|(|                      s\n"
+  "s    |     ____________|        _|                             s\n"
+  "s    |    |     (>>>>)    ___ ____    _______   __________     s\n"
+  "s    |    |__   (>>>>)   |   |    |  /       | /   ____   \\    s\n"
+  "s    |       |  (>>>>)   |     ,__| /     ___| |__|    |  |    s\n"
+  "s    |     __| / /^^\\/\\  |    /     |    |      _______|  |    s\n"
+  "s    |    |   ( (    )/) |    |     |    |     /   ____   |    s\n"
+  "s    |    |   | |    |/| |    |     |    |___  |  |    |  |    s\n"
+  "s    |    |   \\ \\____/// |    |     \\        | |  \\____/  |    s\n"
+  "s    |____|    \\_____,/  |____|      \\_______| \\_______,__|    s\n"
+  "s                      __               _                      s\n"
+  "s                     |_  |       |    /_||    _               s\n"
+  "s              |)()|' |__(|(/(||'(|() /  ||)|'(-(/             s\n"
+  "s              |                                               s\n"
+  "s%39s                       s\n"
+  "s                  +-------------------------+                 s\n"
+  "s                  |  1- Solo (Treinamento)  |                 s\n"
+  "s                  |  2- 2 jogadores         |                 s\n"
+  "s                  |  3- 3 jogadores         |                 s\n"
+  "s                  |  4- 4 jogadores         |                 s\n"
+  "s                  |  0- Sair do Jogo        |                 s\n"
+  "s  UFES 2023       +-------------------------+         v1.0.1  s\n"
+  , msg);
+  imprime_margem_baixo();
 }
 
-void ImprimeMargemCima(){//
-  printf("------------------------------------------------------------------------\n");
+void imprime_margem_cima(){//
+  printf("+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+\n");
 }
 
-void ImprimeMargemBaixo(){//
-  printf("------------------------------------------------------------------------\n");
+void imprime_margem_baixo(){//
+  printf("+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+\n");
 }
 
-tJogo EscolherNomes(tJogo jogo){//
+tJogo escolher_nomes(tJogo jogo){//
   int i=0, j=0;
   char entrada[50];
   char jog[4][TAM_NOME];
@@ -181,8 +175,8 @@ tJogo EscolherNomes(tJogo jogo){//
       break;
     }
 
-    system("clear");
-    ImprimeMargemCima();
+    limpa_tela();
+    imprime_margem_cima();
     printf("\n"
     "        _____                                 _                   \n"
     "       |     |___ _____ ___    ___ ___    ___| |_ ___ _____ ___\n"
@@ -219,7 +213,7 @@ tJogo EscolherNomes(tJogo jogo){//
     seta[2][0], seta[3][0],
     seta[2][1], seta[3][1],
     seta[2][2], jog[2], seta[3][2], jog[3]);
-    ImprimeMargemBaixo();
+    imprime_margem_baixo();
     
     seta[i][0][0] = '\0';
     seta[i][1][0] = '\0';
@@ -227,10 +221,10 @@ tJogo EscolherNomes(tJogo jogo){//
 
     msgErro[0] = '\0';
 
-    ImprimePrefixo();
+    imprime_prefixo();
     scanf("%49s", entrada);
 
-    deuErro = EhNomeErrado(entrada);
+    deuErro = eh_nome_errado(entrada);
     switch(deuErro){
       case 1:
       sprintf(msgErro, "          O nome deve comecar com uma letra!!! ");
@@ -254,8 +248,8 @@ tJogo EscolherNomes(tJogo jogo){//
       
       case 0:
       sprintf(jog[i], "%s", entrada);
-      jogo.jogadores[i] = MudarNome(jogo.jogadores[i], entrada);
-      CentralizaString(jog[i], sizeof(jog[i]));
+      jogo.jogadores[i] = mudar_nome(jogo.jogadores[i], entrada);
+      centraliza_string(jog[i], sizeof(jog[i]));
       break;
     }
   }
@@ -263,7 +257,7 @@ tJogo EscolherNomes(tJogo jogo){//
   return jogo;
 }
 
-int EhNomeErrado(char nome[TAM_NOME]){
+int eh_nome_errado(char nome[TAM_NOME]){
   int i=0, cont=0;
 
   for(i=0;i<TAM_NOME;i++){
@@ -280,7 +274,7 @@ int EhNomeErrado(char nome[TAM_NOME]){
     return 4;
   }
 
-  if( !EhLetra(nome[0]) ){
+  if( !eh_letra(nome[0]) ){
     return 1;
   }
 
@@ -288,7 +282,7 @@ int EhNomeErrado(char nome[TAM_NOME]){
     if( nome[i] == '\0'){
       break;
     }
-    if( !EhLetra(nome[i]) && !EhNumero(nome[i]) ){
+    if( !eh_letra(nome[i]) && !eh_numero(nome[i]) ){
       return 2;
     }
   }
@@ -296,21 +290,21 @@ int EhNomeErrado(char nome[TAM_NOME]){
   return 0;
 }
 
-int EhLetra(char c){
+int eh_letra(char c){
   if( (c>='a' && c<='z') || (c>='A' && c<='Z') ){
     return 1;
   }
   return 0;
 }
 
-int EhNumero(char c){
+int eh_numero(char c){
   if(c>='0' && c<='9'){
     return 1;
   }
   return 0;
 }
 
-int Jogar(tJogo jogo){
+int jogar(tJogo jogo){
   int codigo=0, continuar=0;
   char entrada;
   char pal[TAM_PALAVRA];
@@ -318,48 +312,48 @@ int Jogar(tJogo jogo){
   jogo.jogadorAtual = (rand()%jogo.qtdJogadores);
   do{
     jogo.idTema = (rand()%jogo.qtdPalavras);
-    ObtemPalavra(pal, jogo.palavras[jogo.idTema]);
-    DeixaTodasLetrasMaiusculas(pal);
+    obtem_palavra(pal, jogo.palavras[jogo.idTema]);
+    deixa_todas_letras_maiusculas(pal);
     while(1){
       while(1){
-        system("clear");
-        ImprimeTelaJogo(jogo, codigo);
+        limpa_tela();
+        imprime_tela_jogo(jogo, codigo);
         scanf("\n");
-        ImprimePrefixo();
+        imprime_prefixo();
         scanf("%c", &entrada);
-        if( !EhLetra(entrada) ){
+        if( !eh_letra(entrada) ){
           codigo=1;
           continue;
         }
-        DeixaTodasLetrasMaiusculas(&entrada);
-        if( PalavraTemLetra(jogo.letrasUsadas, entrada)){
+        deixa_todas_letras_maiusculas(&entrada);
+        if( palavra_tem_letra(jogo.letrasUsadas, entrada)){
           codigo=2;
           continue;
         }
         codigo=0;
         break;
       }
-      AdicionarLetra(jogo.letrasUsadas, entrada);
+      adicionar_letra(jogo.letrasUsadas, entrada);
 
-      if( PalavraTemLetra(pal, entrada) ){
-        AlterarQtdAcertos(jogo.jogadores[jogo.jogadorAtual], 1);
+      if( palavra_tem_letra(pal, entrada) ){
+        alterar_qtd_acertos(jogo.jogadores[jogo.jogadorAtual], 1);
       }
-      else jogo.jogadores[jogo.jogadorAtual] = AlterarPontuacao(jogo.jogadores[jogo.jogadorAtual], -1);
+      else jogo.jogadores[jogo.jogadorAtual] = alterar_pontuacao(jogo.jogadores[jogo.jogadorAtual], -1);
       
-      jogo = CalculaFimDeJogo(jogo);
-      if( EhFimDeJogo(jogo) ){//fim de jogo
-        system("clear");
-        ImprimeTelaJogo(jogo, 3);
+      jogo = calcula_fim_de_jogo(jogo);
+      if( eh_fim_de_jogo(jogo) ){//fim de jogo
+        limpa_tela();
+        imprime_tela_jogo(jogo, 3);
         break;
       }
 
       do{
         jogo.jogadorAtual = (jogo.jogadorAtual+1)%jogo.qtdJogadores;
-      } while(!ObtemPontuacaoJogador(jogo.jogadores[jogo.jogadorAtual]));
+      } while(!obtem_pontuacao_jogador(jogo.jogadores[jogo.jogadorAtual]));
     }
-    if(JogarNovamente()){
+    if(jogar_novamente()){
       continuar=1;
-      jogo = ReinicializaJogo(jogo, jogo.jogadorVencedor[0]);
+      jogo = reinicializa_jogo(jogo, jogo.jogadorVencedor[0]);
     }
     else continuar=0;
     
@@ -368,7 +362,7 @@ int Jogar(tJogo jogo){
   return 0;
 }
 
-void ImprimeTelaJogo(tJogo jogo, int codigo){
+void imprime_tela_jogo(tJogo jogo, int codigo){
   int i=0, j=0, verif=0;
   char msg[64];
   char msgVencedor[50];
@@ -385,11 +379,11 @@ void ImprimeTelaJogo(tJogo jogo, int codigo){
   char nomeJogadorAtual[14];
   char trofeu[8][16];
 
-  ObtemDica(dica, jogo.palavras[jogo.idTema]);
-  ObtemPalavra(palavraEspacada, jogo.palavras[jogo.idTema]);
-  ObtemNomeJogador(nomeJogadorAtual, jogo.jogadores[jogo.jogadorAtual]);
+  obtem_dica(dica, jogo.palavras[jogo.idTema]);
+  obtem_palavra(palavraEspacada, jogo.palavras[jogo.idTema]);
+  obtem_nome_jogador(nomeJogadorAtual, jogo.jogadores[jogo.jogadorAtual]);
 
-  DeixaPrimeiraLetraMaiuscula(dica);
+  deixa_primeira_letra_maiuscula(dica);
   for(i=TAM_PALAVRA-1;i>=0;i--){
     dica[i+6] = dica[i];
   }
@@ -399,14 +393,14 @@ void ImprimeTelaJogo(tJogo jogo, int codigo){
   dica[3] = 'a';
   dica[4] = ':';
   dica[5] = ' ';
-  CentralizaString(dica, TAM_PALAVRA+6);
+  centraliza_string(dica, TAM_PALAVRA+6);
 
-  DeixaTodasLetrasMaiusculas(palavraEspacada);
+  deixa_todas_letras_maiusculas(palavraEspacada);
   for(i=TAM_PALAVRA-1;i>=0;i--){
     palavraEspacada[(i*2)+1] = palavraEspacada[i];
     palavraEspacada[(i*2)] = ' ';
   }
-  CentralizaString(palavraEspacada, TAM_PALAVRA*2);
+  centraliza_string(palavraEspacada, TAM_PALAVRA*2);
   
   sprintf(letrasUsadas, "%s", jogo.letrasUsadas);
   for(i=26;i>=0;i--){
@@ -427,20 +421,20 @@ void ImprimeTelaJogo(tJogo jogo, int codigo){
   }
 
   for(i=0;i<jogo.qtdJogadores;i++){
-    ObtemNomeJogador(nome[i], jogo.jogadores[i]);
+    obtem_nome_jogador(nome[i], jogo.jogadores[i]);
   }
   for(i=jogo.qtdJogadores;i<4;i++){
     nome[i][0] = '\0';
   }
   for(i=0;i<jogo.qtdJogadores;i++){
-    CentralizaString(nome[i], sizeof(nome[i]));
+    centraliza_string(nome[i], sizeof(nome[i]));
   }
 
   for(i=jogo.qtdJogadores;i<4;i++){
     pontuacao[i] = ' ';
   }
   for(i=0;i<jogo.qtdJogadores;i++){
-    pontuacao[i] = '0' + ObtemPontuacaoJogador(jogo.jogadores[i]);
+    pontuacao[i] = '0' + obtem_pontuacao_jogador(jogo.jogadores[i]);
   }
   for(i=jogo.qtdJogadores;i<4;i++){
     sprintf(pts[i], "   ");
@@ -463,7 +457,7 @@ void ImprimeTelaJogo(tJogo jogo, int codigo){
     }
   }
 
-  switch(ObtemPontuacaoJogador(jogo.jogadores[jogo.jogadorAtual])){
+  switch(obtem_pontuacao_jogador(jogo.jogadores[jogo.jogadorAtual])){
     case 0:
       hangman[5] = '\\';
 
@@ -494,15 +488,15 @@ void ImprimeTelaJogo(tJogo jogo, int codigo){
       sprintf(msgVencedor, "Voce venceu!!!");
     }
     else{
-      ObtemNomeJogador(nomeVencedor[0], jogo.jogadores[jogo.jogadorVencedor[0]]);
+      obtem_nome_jogador(nomeVencedor[0], jogo.jogadores[jogo.jogadorVencedor[0]]);
       sprintf(msgVencedor, "Vencedor: %s!!!", nomeVencedor[0]);
     }
       
     break;
 
     case 2:
-      ObtemNomeJogador(nomeVencedor[0], jogo.jogadores[jogo.jogadorVencedor[0]]);
-      ObtemNomeJogador(nomeVencedor[1], jogo.jogadores[jogo.jogadorVencedor[1]]);
+      obtem_nome_jogador(nomeVencedor[0], jogo.jogadores[jogo.jogadorVencedor[0]]);
+      obtem_nome_jogador(nomeVencedor[1], jogo.jogadores[jogo.jogadorVencedor[1]]);
       sprintf(msgVencedor, "%s e %s empataram!!!", nomeVencedor[0], nomeVencedor[1]);
     break;
 
@@ -510,7 +504,7 @@ void ImprimeTelaJogo(tJogo jogo, int codigo){
       msgVencedor[0] = '\0';
     break;
   }
-  CentralizaString(msgVencedor, sizeof(msgVencedor));
+  centraliza_string(msgVencedor, sizeof(msgVencedor));
 
   switch(jogo.qtdVencedores){//formatacao trofeu
     case 0:
@@ -576,7 +570,7 @@ void ImprimeTelaJogo(tJogo jogo, int codigo){
     break;
   }
 
-  ImprimeMargemCima();
+  imprime_margem_cima();
   printf(
   "\n"
   "    %13s    %13s    %13s    %13s\n"
@@ -611,14 +605,14 @@ void ImprimeTelaJogo(tJogo jogo, int codigo){
   trofeu[0], hangman[0], trofeu[1], hangman[2], hangman[1], hangman[3],
   trofeu[2], hangman[4], hangman[5], trofeu[3], trofeu[4], trofeu[5], trofeu[6],
   palavraEspacada, trofeu[7], letrasUsadas, msg);
-  ImprimeMargemBaixo();
+  imprime_margem_baixo();
 }
 
-void ObtemNomeJogador(char * copiaNome, tJogador jogador){
+void obtem_nome_jogador(char * copiaNome, tJogador jogador){
   sprintf(copiaNome, "%s", jogador.nome);
 }
 
-void CentralizaString(char * nome, int strSize){
+void centraliza_string(char * nome, int strSize){
   int i=0, tam=0;
 
   while(i<strSize){
@@ -646,37 +640,37 @@ void CentralizaString(char * nome, int strSize){
   nome[strSize-1] = '\0';
 }
 
-void DeixaPrimeiraLetraMaiuscula(char * str){
+void deixa_primeira_letra_maiuscula(char * str){
   int i=0;
   for(i=0;i<999;i++){
     if(!str[i]){
       break;
     }
-    if(EhLetra(str[i])){
-      str[i] = DeixaLetraMaiscula(str[i]);
+    if(eh_letra(str[i])){
+      str[i] = deixa_letra_maiscula(str[i]);
       break;
     }
   }
 }
 
-void DeixaTodasLetrasMaiusculas(char * str){
+void deixa_todas_letras_maiusculas(char * str){
   int i=0;
   for(i=0;i<999;i++){
     if(!str[i]){
       break;
     }
-    str[i] = DeixaLetraMaiscula(str[i]);
+    str[i] = deixa_letra_maiscula(str[i]);
   }
 }
 
-char DeixaLetraMaiscula(char letra){
+char deixa_letra_maiscula(char letra){
   if( letra>='a' && letra<='z'){
     letra -= ' ';
   }
   return letra;
 }
 
-int PalavraTemLetra(char * palavra, char letra){
+int palavra_tem_letra(char * palavra, char letra){
   int i=0, cont=0;
   for(i=0;i<999;i++){
     if(!palavra[i]){
@@ -689,10 +683,10 @@ int PalavraTemLetra(char * palavra, char letra){
   return cont;
 }
 
-void AdicionarLetra(char * str, char letra){
+void adicionar_letra(char * str, char letra){
   int i=0;
   for(i=0;i<999;i++){
-    if( !EhLetra(str[i]) ){
+    if( !eh_letra(str[i]) ){
       str[i] = letra;
       str[i+1] = '\0';
       break;
@@ -700,17 +694,17 @@ void AdicionarLetra(char * str, char letra){
   }
 }
 
-tJogo CalculaFimDeJogo(tJogo jogo){//-1 nao acabou 0- singleplayer perdeu 1- vitoria de um jogador ou todos os outros perderam 2- empate de dois jogadores
+tJogo calcula_fim_de_jogo(tJogo jogo){//-1 nao acabou 0- singleplayer perdeu 1- vitoria de um jogador ou todos os outros perderam 2- empate de dois jogadores
   int i=0, cont=0, idVencedor=0;
   
   if( jogo.qtdJogadores==1 ){//singleplayer
-    if( !ObtemPontuacaoJogador(jogo.jogadores[0]) ){//singleplayer perdeu
+    if( !obtem_pontuacao_jogador(jogo.jogadores[0]) ){//singleplayer perdeu
       jogo.qtdVencedores=0;
     }
   }
   if( jogo.qtdJogadores>1 ){//multijogador
     for(i=0;i<jogo.qtdJogadores;i++){
-      if( ObtemPontuacaoJogador(jogo.jogadores[i]) ){
+      if( obtem_pontuacao_jogador(jogo.jogadores[i]) ){
         idVencedor = i;
         cont++;
       }
@@ -720,22 +714,22 @@ tJogo CalculaFimDeJogo(tJogo jogo){//-1 nao acabou 0- singleplayer perdeu 1- vit
       jogo.jogadorVencedor[0]=idVencedor;
     }
   }
-  if( PalavraFoiDescoberta(jogo) ){//palavra foi descoberta
+  if( palavra_foi_descoberta(jogo) ){//palavra foi descoberta
     idVencedor=0;
     jogo.qtdVencedores=1;
     for(i=0;i<jogo.qtdJogadores;i++){//descobrir a maior pontuacao
       if(jogo.qtdJogadores==1){
         break;
       }
-      if( ObtemPontuacaoJogador(jogo.jogadores[i]) > ObtemPontuacaoJogador(jogo.jogadores[idVencedor]) ){
+      if( obtem_pontuacao_jogador(jogo.jogadores[i]) > obtem_pontuacao_jogador(jogo.jogadores[idVencedor]) ){
         idVencedor = i;
       }
-      else if( ObtemPontuacaoJogador(jogo.jogadores[i]) == ObtemPontuacaoJogador(jogo.jogadores[idVencedor]) ){
-        if( ObtemQtdAcertosJogador(jogo.jogadores[i]) > ObtemQtdAcertosJogador(jogo.jogadores[idVencedor]) ){
+      else if( obtem_pontuacao_jogador(jogo.jogadores[i]) == obtem_pontuacao_jogador(jogo.jogadores[idVencedor]) ){
+        if( obtem_qtd_acertos_jogador(jogo.jogadores[i]) > obtem_qtd_acertos_jogador(jogo.jogadores[idVencedor]) ){
           idVencedor = i;
         }
-        else if( ObtemQtdAcertosJogador(jogo.jogadores[i]) == ObtemQtdAcertosJogador(jogo.jogadores[idVencedor]) ){
-          if(!jogo.jogadorVencedor>=0 && idVencedor!=i){
+        else if( obtem_qtd_acertos_jogador(jogo.jogadores[i]) == obtem_qtd_acertos_jogador(jogo.jogadores[idVencedor]) ){
+          if((!(jogo.jogadorVencedor>=0)) && (idVencedor!=i)){
             jogo.jogadorVencedor[1] = i;
             jogo.qtdVencedores = 2;
           }
@@ -748,11 +742,11 @@ tJogo CalculaFimDeJogo(tJogo jogo){//-1 nao acabou 0- singleplayer perdeu 1- vit
   return jogo;
 }
 
-int PalavraFoiDescoberta(tJogo jogo){
+int palavra_foi_descoberta(tJogo jogo){
   int i=0, j=0, tam=0, qtd=0, cont=0;
   char pal[TAM_PALAVRA];
-  ObtemPalavra(pal, jogo.palavras[jogo.idTema]);
-  DeixaTodasLetrasMaiusculas(pal);
+  obtem_palavra(pal, jogo.palavras[jogo.idTema]);
+  deixa_todas_letras_maiusculas(pal);
 
   for(i=0;i<999;i++){
     if(!pal[i]){
@@ -781,7 +775,7 @@ int PalavraFoiDescoberta(tJogo jogo){
   return 0;
 }
 
-int EhFimDeJogo(tJogo jogo){
+int eh_fim_de_jogo(tJogo jogo){
   switch(jogo.qtdVencedores){
     case 0:
     return 1;
@@ -801,7 +795,7 @@ int EhFimDeJogo(tJogo jogo){
   }
 }
 
-tJogo ReinicializaJogo(tJogo jogo, int jogadorInicial){
+tJogo reinicializa_jogo(tJogo jogo, int jogadorInicial){
   int i=0;
 
   jogo.jogadorVencedor[0] = 0;
@@ -813,8 +807,8 @@ tJogo ReinicializaJogo(tJogo jogo, int jogadorInicial){
   else jogo.jogadorAtual = jogadorInicial;
   
   for(i=0;i<jogo.qtdJogadores;i++){
-    jogo.jogadores[i] = ReiniciarPontuacao(jogo.jogadores[i]);
-    jogo.jogadores[i] = ReiniciarQtdAcertos(jogo.jogadores[i]);
+    jogo.jogadores[i] = reiniciar_pontuacao(jogo.jogadores[i]);
+    jogo.jogadores[i] = reiniciar_qtd_acertos(jogo.jogadores[i]);
   }
   for(i=0;i<27;i++){
     jogo.letrasUsadas[i] = '\0';
@@ -822,7 +816,7 @@ tJogo ReinicializaJogo(tJogo jogo, int jogadorInicial){
   return jogo;
 }
 
-int JogarNovamente(){
+int jogar_novamente(){
   char opcao;
   int erro=0;
   

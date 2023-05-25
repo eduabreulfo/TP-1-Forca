@@ -1,7 +1,7 @@
 
 # variaveis
 CC = gcc
-CFLAGS =
+CFLAGS = -Wall -g
 
 SRCDIR = src
 OBJDIR = obj
@@ -33,7 +33,7 @@ $(TARGET): $(OBJS)
 
 # outras regras
 clean:
-	$(RM) $(OBJS)  $(TARGET)
+	$(RM) $(OBJS) $(TARGET) $(TARGET).exe
 
 run: 
 	./$(TARGET)
