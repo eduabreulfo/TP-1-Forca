@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 
-#define TAM_PALAVRA 15
+#define TAM_PALAVRA 14
 
 typedef struct{
   char palavra[2][TAM_PALAVRA];

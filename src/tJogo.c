@@ -51,13 +51,15 @@ tJogo menu_principal(tJogo jogo){//
   return jogo;
 }
 
-void imprime_tela_menu_principal(int erro){//
+void imprime_tela_menu_principal(int erro){
+  
   char msg[24];
   switch(erro){
     case 0:
       sprintf(msg, " ");
     break;
     
+    /*
     case -1:
       sprintf(msg, "Digite 0 para confirmar");
     break;
@@ -65,42 +67,45 @@ void imprime_tela_menu_principal(int erro){//
     case 1:
       sprintf(msg, "   Opcao invalida!!!");
     break;
+    */
+
+    default:
+      msg[0] = 0;
   }
+  
   imprime_margem_cima();
   printf(
-  "s       _________________     |        |                       s\n"
-  "s      |                 |  <_|()(|() (|(|                     s\n"
-  "s      |     ____________|       _|                            s\n"
-  "s      |    |     (>>>>)    ___ ___    ______   ________       s\n"
-  "s      |    |__   (>>>>)   |   |   |  /      | /   __   \\      s\n"
-  "s      |       |  (>>>>)   |    ___| /    ___| |__|  |  |      s\n"
-  "s      |     __| / /^^\\/\\  |   /     |   |      _____|  |      s\n"
-  "s      |    |   ( (    )/) |   |     |   |     /   __   |      s\n"
-  "s      |    |   | |    |/| |   |     |   |___  |  /  |  |      s\n"
-  "s      |    |   \\ \\____/// |   |     \\       | |  \\__|  |      s\n"
-  "s      |____|    \\______/  |___|      \\______| \\_____,__|      s\n"
-  "s                      __               _                      s\n"
-  "s                     |_  |       |    /_||    _               s\n"
-  "s              |)()|' |__(|(/(||'(|() /  ||)|'(-(/             s\n"
-  "s              |                                               s\n"
-  "s%40s                      s\n"
-  "s                  +-------------------------+                 s\n"
-  "s                  |  1- Solo (Treinamento)  |                 s\n"
-  "s                  |  2- 2 jogadores         |                 s\n"
-  "s                  |  3- 3 jogadores         |                 s\n"
-  "s                  |  4- 4 jogadores         |                 s\n"
-  "s                  |  0- Sair do Jogo        |                 s\n"
-  "s  UFES 2023       +-------------------------+           v1.0  s\n"
+  "~       _________________     |        |\n"
+  "~      |                 |  <_|()(|() (|(|\n"
+  "~      |     ____________|       _|\n"
+  "~      |    |     (>>>>)    ___ ___    ______   ________\n"
+  "~      |    |__   (>>>>)   |   |   |  /      | /   __   \\\n"
+  "~      |       |  (>>>>)   |    ___| /    ___| |__|  |  |\n"
+  "~      |     __| / /^^\\/\\  |   /     |   |      _____|  |\n"
+  "~      |    |   ( (    )/) |   |     |   |     /   __   |\n"
+  "~      |    |   | |    |/| |   |     |   |___  |  /  |  |\n"
+  "~      |    |   \\ \\____/// |   |     \\       | |  \\__|  |\n"
+  "~      |____|    \\______/  |___|      \\______| \\_____,__|\n"
+  "~                      __               _\n"
+  "~                     |_  |       |    /_||    _\n"
+  "~              |)()|' |__(|(/(||'(|() /  ||)|'(-(/\n"
+  "~              |\n"
+  "~%38s\n"
+  "~                       1 - Solo (Treinamento)\n"
+  "~                       2 - 2 jogadores\n"
+  "~                       3 - 3 jogadores\n"
+  "~                       4 - 4 jogadores\n"
+  "~  v1.0.1               0 - Sair do Jogo\n"
   , msg);
   imprime_margem_baixo();
 }
 
 void imprime_margem_cima(){//
-  printf("+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+\n");
+  printf("~\n");
 }
 
 void imprime_margem_baixo(){//
-  printf("+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+\n");
+  printf("~\n");
 }
 
 tJogo escolher_nomes(tJogo jogo){//
@@ -176,32 +181,28 @@ tJogo escolher_nomes(tJogo jogo){//
 
     limpa_tela();
     imprime_margem_cima();
-    printf("\n"
-    "        _____                                 _                   \n"
-    "       |     |___ _____ ___    ___ ___    ___| |_ ___ _____ ___\n"
-    "       |   --| . |     | . |  |_ -| -_|  |  _|   | .'|     | .'|_\n"
-    "       |_____|___|_|_|_|___|  |___|___|  |___|_|_|__,|_|_|_|__,| |\n"
-    "                                                  _____        |_|\n"
-    "                __               _           %6s__  |\n"
-    "             __|  |___ ___ ___ _| |___ ___   %6s|  _|\n"
-    "            |  |  | . | . | .'| . | . |  _|  %6s|_|\n"
-    "            |_____|___|_  |__,|___|___|_|    %6s|_|\n"
-    "                      |___|\n"
-    "\n"
-    "\n"
-    "\n"
-    "         %47s\n"
-    "\n"
-    "          %3s                          %3s\n"
-    "          %3s                          %3s\n"
-    "          %3s  %13s           %3s  %13s\n"
-    "\n"
-    "          %3s                          %3s\n"
-    "          %3s                          %3s\n"
-    "          %3s  %13s           %3s  %13s\n"
-    "\n"
-    "\n"
-    "\n",
+    printf(
+    "~     _____                                 _                   \n"
+    "~    |     |___ _____ ___    ___ ___    ___| |_ ___ _____ ___\n"
+    "~    |   --| . |     | . |  |_ -| -_|  |  _|   | .'|     | .'|_\n"
+    "~    |_____|___|_|_|_|___|  |___|___|  |___|_|_|__,|_|_|_|__,| |\n"
+    "~                                               _____        |_|\n"
+    "~             __               _           %6s__  |\n"
+    "~          __|  |___ ___ ___ _| |___ ___   %6s|  _|\n"
+    "~         |  |  | . | . | .'| . | . |  _|  %6s|_|\n"
+    "~         |_____|___|_  |__,|___|___|_|    %6s|_|\n"
+    "~                     |___|\n"
+    "~\n"
+    "~       %45s\n"
+    "~\n"
+    "~\n"
+    "~        %3s                         %3s\n"
+    "~        %3s                         %3s\n"
+    "~        %3s  %13s          %3s  %13s\n"
+    "~\n"
+    "~        %3s                         %3s\n"
+    "~        %3s                         %3s\n"
+    "~        %3s  %13s          %3s  %13s\n",
     numeroJogadorAscii[0],
     numeroJogadorAscii[1],
     numeroJogadorAscii[2],
@@ -317,8 +318,8 @@ int jogar(tJogo jogo){
       while(1){
         limpa_tela();
         imprime_tela_jogo(jogo, codigo);
-        scanf("\n");
         imprime_prefixo();
+        scanf("\n");
         scanf("%c", &entrada);
         if( !eh_letra(entrada) ){
           codigo=1;
@@ -364,7 +365,7 @@ int jogar(tJogo jogo){
 void imprime_tela_jogo(tJogo jogo, int codigo){
   int i=0, j=0, verif=0;
   char msg[64];
-  char msgVencedor[50];
+  char msgVencedor[41];
   char nomeVencedor[2][TAM_NOME];
   char nome[4][TAM_NOME];
   char molduraNomeCima[4][TAM_NOME];
@@ -496,7 +497,7 @@ void imprime_tela_jogo(tJogo jogo, int codigo){
     case 2:
       obtem_nome_jogador(nomeVencedor[0], jogo.jogadores[jogo.jogadorVencedor[0]]);
       obtem_nome_jogador(nomeVencedor[1], jogo.jogadores[jogo.jogadorVencedor[1]]);
-      sprintf(msgVencedor, "%s e %s empataram!!!", nomeVencedor[0], nomeVencedor[1]);
+      sprintf(msgVencedor, "%s e %s empataram!", nomeVencedor[0], nomeVencedor[1]);
     break;
 
     default:
@@ -571,32 +572,27 @@ void imprime_tela_jogo(tJogo jogo, int codigo){
 
   imprime_margem_cima();
   printf(
-  "\n"
-  "    %13s    %13s    %13s    %13s\n"
-  "    %13s    %13s    %13s    %13s\n"
-  "    %13s    %13s    %13s    %13s\n"
-  "        %c %3s            %c %3s            %c %3s            %c %3s    \n"
-  "\n"
-  "                          %20s\n"
-  "\n"
-  "            %49s\n"
-  "       ________\n"
-  "      | _______\n"
-  "      ||/    |                                       %15s\n"
-  "      ||     %c                                       %15s\n"
-  "      ||    %c%c%c                                      %15s\n"
-  "      ||    %c %c                                      %15s\n"
-  "      ||                                             %15s\n"
-  "     _||________                                     %15s\n"
-  "    |           |_                                   %15s\n"
-  "    |             |   %29s  %15s\n"
-  "\n"
-  "\n"
-  "\n"
-  "   Letras ja escolhidas:%s\n"
-  "\n"
-  "   %s\n"
-  "\n",
+  "~  %13s  %13s  %13s  %13s\n"
+  "~  %13s  %13s  %13s  %13s\n"
+  "~  %13s  %13s  %13s  %13s\n"
+  "~       %c %3s          %c %3s          %c %3s          %c %3s\n"
+  "~\n"
+  "~                    %20s\n"
+  "~\n"
+  "~    ________%40s\n"
+  "~   | _______\n"
+  "~   ||/    |                                   %15s\n"
+  "~   ||     %c                                   %15s\n"
+  "~   ||    %c%c%c                                  %15s\n"
+  "~   ||    %c %c                                  %15s\n"
+  "~   ||                                         %15s\n"
+  "~  _||________                                 %15s\n"
+  "~ |           |_                               %15s\n"
+  "~ |             | %26s  %15s\n"
+  "~\n"
+  "~ Letras usadas:%s\n"
+  "~\n"
+  "~ %s\n",
   molduraNomeCima[0], molduraNomeCima[1], molduraNomeCima[2], molduraNomeCima[3],
   nome[0], nome[1], nome[2], nome[3],
   molduraNomeBaixo[0], molduraNomeBaixo[1], molduraNomeBaixo[2], molduraNomeBaixo[3],
@@ -820,7 +816,8 @@ int jogar_novamente(){
   int erro=0;
   
   do{
-    scanf("%*[\n]");
+    imprime_prefixo();
+    scanf("\n");
     scanf("%c", &opcao);
     if(opcao=='S'||opcao=='s'||opcao=='N'||opcao=='n'){
       erro=0;
